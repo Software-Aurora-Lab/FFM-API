@@ -32,13 +32,13 @@ public class UtilitiesFFM {
         )
     );
 
-    // private static final MethodHandle stringManipulator = linker.downcallHandle(
-    //     lib.find("stringManipulator").orElseThrow(),
-    //     FunctionDescriptor.ofVoid(
-    //         ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.JAVA_INT,
-    //         ValueLayout.ADDRESS, ValueLayout.JAVA_INT
-    //     )
-    // );
+    private static final MethodHandle stringManipulator = linker.downcallHandle(
+        lib.find("stringManipulator").orElseThrow(),
+        FunctionDescriptor.ofVoid(
+            ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.JAVA_INT,
+            ValueLayout.ADDRESS, ValueLayout.JAVA_INT
+        )
+    );
 
 
 
@@ -64,22 +64,22 @@ public class UtilitiesFFM {
         }
     }
 
-    // public String manipulateStrings(String s, String[] s1) throws Throwable {
-    //     try (Arena arena = Arena.ofConfined()) {
-    //         MemorySegment strSeg = arena.allocateUtf8String(s);
-    //         MemorySegment outSeg = arena.allocate(100);
+    public String manipulateStrings(String s, String[] s1) throws Throwable {
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment strSeg = arena.allocateUtf8String(s);
+            MemorySegment outSeg = arena.allocate(100);
             
-    //         MemorySegment[] segments = new MemorySegment[s1.length];
-    //         for (int i = 0; i < s1.length; i++) {
-    //             segments[i] = MemorySegment.allocateUtf8String(s1[i], arena);
-    //         }
+            MemorySegment[] segments = new MemorySegment[s1.length];
+            for (int i = 0; i < s1.length; i++) {
+                segments[i] = MemorySegment.allocateUtf8String(s1[i], arena);
+            }
     
-    //         MemorySegment arraySeg = MemorySegment.allocateArray(ValueLayout.ADDRESS, segments, arena);
+            MemorySegment arraySeg = MemorySegment.allocateArray(ValueLayout.ADDRESS, segments, arena);
     
-    //         stringManipulator.invoke(strSeg, arraySeg, s1.length, outSeg, 100);
-    //         return outSeg.getUtf8String(0);
-    //     }
-    // }
+            stringManipulator.invoke(strSeg, arraySeg, s1.length, outSeg, 100);
+            return outSeg.getUtf8String(0);
+        }
+    }
     
 
     public static void main(String[] args) throws Throwable {
@@ -92,6 +92,6 @@ public class UtilitiesFFM {
             System.out.println("A Byte is: " + b);
         }
         System.out.println("THIS IS THE STRING MANIPULATOR!!");
-        // System.out.println(util.manipulateStrings("asdfxvcbiojdasaisdf hello world,,,", args));
+        System.out.println(util.manipulateStrings("asdfxvcbiojdasaisdf hello world,,,", args));
     }
 }

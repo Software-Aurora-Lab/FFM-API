@@ -40,19 +40,19 @@ uint8_t* returnAByteArray() {
 }
 
 // void stringManipulator(const char* input, const char** stringArray, int arrayLength, char* output, int outputSize)
-// void stringManipulator(const char* input, const char** array, int len, char* output, int outSize) {
-//     std::string s = input;
-//     std::cout << "NOW IN NATIVE STRING ENVIRONMENT!!" << std::endl;
-//     std::cout << "Your caller says: " << s << std::endl;
+void stringManipulator(const char* input, const char** array, int len, char* output, int outSize) {
+    std::string s = input;
+    std::cout << "NOW IN NATIVE STRING ENVIRONMENT!!" << std::endl;
+    std::cout << "Your caller says: " << s << std::endl;
 
-//     std::cout << "Now iterating over the given string array." << std::endl;
-//     for (int i = 0; i < len; i++) {
-//         std::cout << array[i] << std::endl;
-//     }
+    std::cout << "Now iterating over the given string array." << std::endl;
+    for (int i = 0; i < len; i++) {
+        std::cout << array[i] << std::endl;
+    }
 
-//     s.append("::::::THIS IS APPENDED TEXT!!!! WARNING!!! WARNING!!!! :)+++");
-//     std::strncpy(output, s.c_str(), outSize - 1);
-//     output[outSize - 1] = '\0'; // null terminate safely
-// }
+    s.append("::::::THIS IS APPENDED TEXT!!!! WARNING!!! WARNING!!!! :)+++");
+    std::strncpy(output, s.c_str(), outSize - 1);
+    output[outSize - 1] = '\0'; // null terminate safely
+}
 
 } // extern "C"
